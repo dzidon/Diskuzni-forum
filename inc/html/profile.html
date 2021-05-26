@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Fórum</title>
+
+    <!-- Fonty -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+    <!-- Styly -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-wrap">
+            <div class="header-logo">
+                <i class="fas fa-user-graduate header-logo-icon"></i>FÓRUM
+            </div>
+            <nav>
+                <div class="nav-button">_ViictY_</div>
+                <div class="nav-button">Odhlásit se</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main wrap -->
+    <main>
+        <div class="main-wrap">
+            <!-- Header s profilovkou, bannerem a jménem -->
+            <div class="user-header-wrap">
+                <div class="user-header-banner">
+                    <div class="user-header-banner-edit" id="user-header-banner-edit">
+                        <i class="fas fa-camera user-header-picture-edit-icon"></i>
+                    </div>
+                </div>
+                <div class="user-header">
+                    <div class="user-header-picture">
+                        <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="120" height="120" class="user-header-picture-img">
+                        <div class="user-header-picture-edit" id="user-header-picture-edit">
+                            <i class="fas fa-camera user-header-picture-edit-icon"></i>
+                        </div>
+                    </div>
+                    <div class="user-header-info">
+                        <div class="user-header-name-wrap">
+                            <h1 class="user-header-name">Jméno</h1>
+                            <a href="odkazNaEditaciJmena" class="user-header-name-edit">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            <a href="odkazNaMute" class="user-header-name-edit">
+                                <i class="fas fa-ban"></i>
+                            </a>
+                            <a href="odkazNaUnmute" class="user-header-unmute">
+                                <i class="fas fa-ban"></i>
+                            </a>
+                        </div>
+                        <div class="user-header-role">Uživatel</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload profilovky/úvodky -->
+            <div id="user-upload-wrap"></div>
+
+            <!-- Error -->
+            <div class="input-error">Toto je error!</div>
+
+            <!-- Popis uživatele -->
+            <div class="section-header-wrap">
+                <div class="section-header-name"><i class="fas fa-bullhorn section-header-icon"></i>Popis uživatele</div>
+                <a href="odkazNaEditaciPopisu" class="section-header-button">Upravit</a>
+            </div>
+            <div class="user-description">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In dapibus augue non sapien. Maecenas ipsum velit, consectetuer eu lobortis ut, dictum at dui. Nullam rhoncus aliquam metus. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Nulla est. Nunc dapibus tortor vel mi dapibus sollicitudin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. In rutrum. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Suspendisse nisl. Cras elementum. Nullam lectus justo, vulputate eget mollis sed, tempor sed magna. Nunc auctor. Donec iaculis gravida nulla.
+            </div>
+
+            <!-- Statistiky uživatele -->
+            <div class="section-header-wrap">
+                <div class="section-header-name"><i class="fas fa-chart-line section-header-icon"></i>Statistiky uživatele</div>
+            </div>
+
+            <!-- Statistika: registrovan -->
+            <div class="stat-wrap">
+                <div class="stat-left">
+                    Registrován
+                </div>
+                <div class="stat-right">
+                    24/08/2018
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Statistika: zalozenych temat -->
+            <div class="stat-wrap">
+                <div class="stat-left">
+                    Založených témat
+                </div>
+                <div class="stat-right">
+                    1234
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Statistika: odpovědí -->
+            <div class="stat-wrap">
+                <div class="stat-left">
+                    Napsáno odpovědí
+                </div>
+                <div class="stat-right">
+                    1234
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Statistika: celkem příspěvků -->
+            <div class="stat-wrap">
+                <div class="stat-left">
+                    Celkem příspěvků
+                </div>
+                <div class="stat-right">
+                    1234
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Statistika: umlčen -->
+            <div class="stat-wrap">
+                <div class="stat-left">
+                    Umlčen
+                </div>
+                <div class="stat-right">
+                    Ne
+                </div>
+            </div>
+
+            <!-- Nedávná aktivita -->
+            <div class="section-header-wrap">
+                <div class="section-header-name"><i class="far fa-comments section-header-icon"></i>Nedávná aktivita</div>
+            </div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <!-- Téma -->
+            <div class="section-post">
+                <div class="section-post-left">
+                    <div class="section-post-image-wrap">
+                        <a href="odkazNaZakladatele" class="section-post-image-author">
+                            <img src="../../img/noprofilepic.png" alt="Profilový obrázek" width="40" height="40">
+                        </a>
+                    </div>
+
+                    <div class="section-post-links">
+                        <a href="odkazNaPost" class="section-post-name"><i class="fas fa-thumbtack section-post-pin"></i><i class="fas fa-lock section-post-lock"></i>Toto je název tématu</a>
+                        <span class="section-post-info">
+                            Odpověděl 26/05/2021 v 18:00
+                        </span>
+                    </div>
+                </div>
+
+                <div class="section-post-right">
+                    <div class="section-post-replies"><i class="fas fa-reply section-post-icon"></i>5000</div>
+                    <div class="section-post-views"><i class="fas fa-eye section-post-icon"></i>5000</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../../js/profile.js"></script>
+</body>
+</html>

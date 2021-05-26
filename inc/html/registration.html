@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Fórum</title>
+
+    <!-- Fonty -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+    <!-- Styly -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-wrap">
+            <div class="header-logo">
+                <i class="fas fa-user-graduate header-logo-icon"></i>FÓRUM
+            </div>
+            <nav>
+                <div class="nav-button">_ViictY_</div>
+                <div class="nav-button">Odhlásit se</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main wrap -->
+    <main>
+        <div class="main-wrap main-wrap-small">
+            <h1>Registrace</h1>
+            <form action="" method="post">
+                <label for="name">Přezdívka:</label><br>
+                <input type="text" id="name" name="name" class="user-input" size="40">
+                <div class="input-error">Toto je error!</div>
+                <br> <!-- pokud neni error, vygenerovat 2 br -->
+                <label for="email">E-mail:</label><br>
+                <input type="email" id="email" name="email" class="user-input" size="40">
+                <div class="input-error">Toto je error!</div>
+                <br> <!-- pokud neni error, vygenerovat 2 br -->
+                <label for="password">Heslo:</label><br>
+                <input type="password" id="password" name="password" class="user-input" size="40">
+                <div class="input-error">Toto je error!</div>
+                <br> <!-- pokud neni error, vygenerovat 2 br -->
+                <label for="password2">Heslo znovu:</label><br>
+                <input type="password" id="password2" name="password2" class="user-input" size="40">
+                <div class="input-error">Toto je error!</div>
+                <br> <!-- pokud neni error, vygenerovat 2 br -->
+                <div class="login-links">
+                    <div>Už máte účet? <a href="odkazNaPrihlaseni" class="text-link">Přihlásit se</a></div>
+                </div>
+                <div class="buttons-wrap buttons-center">
+                    <input type="submit" value="Registrovat" class="button-primary">
+                    <a href="odkazZpet" class="button-secondary">Zpět</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

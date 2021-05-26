@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Fórum</title>
+
+    <!-- Fonty -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+    <!-- Styly -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- BBcode -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/default.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/sceditor@3/minified/sceditor.min.js"></script>
+    <script src="../../bbcode/languages/cs.js"></script>
+    <script src="../../bbcode/icons/material.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-wrap">
+            <div class="header-logo">
+                <i class="fas fa-user-graduate header-logo-icon"></i>FÓRUM
+            </div>
+            <nav>
+                <div class="nav-button">_ViictY_</div>
+                <div class="nav-button">Odhlásit se</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main wrap -->
+    <main>
+        <div class="main-wrap">
+            <h1>Upravit téma v sekci Název sekce</h1>
+            <form action="" method="post">
+                <label for="edit-topic-name">Název tématu:</label><br>
+                <input type="text" id="edit-topic-name" name="edit-topic-name" class="user-input new-topic-name">
+                <div class="input-error">Toto je error!</div>
+                <br> <!-- pokud neni error, vygenerovat 2 br -->
+                <label for="edit-topic">Obsah tématu:</label>
+                <textarea id="edit-topic" name="edit-topic" rows="10" class="description-edit-textarea"></textarea>
+                <div class="input-error">Toto je error!</div><br>
+                <div class="buttons-wrap">
+                    <input type="submit" value="Uložit" class="button-primary">
+                    <a href="odkazZpet" class="button-secondary">Zpět</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Textarea new-topic bude podporovat BBcode -->
+    <script src="https://cdn.jsdelivr.net/npm/sceditor@3/minified/formats/bbcode.min.js"></script>
+    <script>
+        let textarea = document.getElementById('edit-topic');
+        sceditor.create(textarea, {
+            format: 'bbcode',
+            style: 'https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/content/default.min.css',
+            emoticonsRoot: 'bbcode/',
+            resizeEnabled: false,
+            width: '100%',
+            height: 500,
+            icons: 'material',
+            locale: 'cs'
+        });
+    </script>
+</body>
+</html>
