@@ -747,6 +747,27 @@ a:hover {
 }
 
 /*
+    BBcode styly
+*/
+.bbcode-justify {
+    text-align: justify;
+}
+
+.bbcode-code {
+    background-color: #F1F1F1;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+}
+
+.bbcode-quote {
+    background-color: #FFF7D9;
+    border-left: 5px #F4E59F solid;
+    padding: 7px 15px 7px 15px;
+}
+
+
+
+/*
     YouTube
 */
 .video-container {

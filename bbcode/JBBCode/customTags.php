@@ -29,7 +29,7 @@ $builder = new JBBCode\CodeDefinitionBuilder('right', '<div align="right">{param
 $parser->addCodeDefinition($builder->build());
 
 //zarovnat do bloku
-$builder = new JBBCode\CodeDefinitionBuilder('justify', '<div style="text-align: justify;">{param}</div>');
+$builder = new JBBCode\CodeDefinitionBuilder('justify', '<div class="bbcode-justify">{param}</div>');
 $parser->addCodeDefinition($builder->build());
 
 //pismo
@@ -43,13 +43,12 @@ $builder->setUseOption(true)->setOptionValidator(new \JBBCode\validators\Fontsiz
 $parser->addCodeDefinition($builder->build());
 
 //kod
-$font = "font-family: 'Courier New', monospace;";
-$builder = new JBBCode\CodeDefinitionBuilder('code', '<div style="background-color: #F1F1F1; padding: 15px; '.$font.'">{param}</div>');
+$builder = new JBBCode\CodeDefinitionBuilder('code', '<div class="bbcode-code">{param}</div>');
 $builder->setParseContent(false);
 $parser->addCodeDefinition($builder->build());
 
 //citace
-$builder = new JBBCode\CodeDefinitionBuilder('quote', '<div style="background-color: #FFF7D9; border-left: 5px #F4E59F solid; padding: 7px 15px 7px 15px;">{param}</div>');
+$builder = new JBBCode\CodeDefinitionBuilder('quote', '<div class="bbcode-quote">{param}</div>');
 $parser->addCodeDefinition($builder->build());
 
 //email
