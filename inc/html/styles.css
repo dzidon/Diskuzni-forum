@@ -746,6 +746,7 @@ a:hover {
     margin-top: 10px;
 }
 
+
 /*
     BBcode styly
 */
@@ -765,6 +766,11 @@ a:hover {
     padding: 7px 15px 7px 15px;
 }
 
+.bbcode-img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+}
 
 
 /*

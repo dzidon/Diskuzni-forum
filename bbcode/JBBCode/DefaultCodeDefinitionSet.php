@@ -49,14 +49,14 @@ class DefaultCodeDefinitionSet implements CodeDefinitionSet
         array_push($this->definitions, $builder->build());
 
         /* [img] image tag */
-        $builder = new CodeDefinitionBuilder('img', '<img src="{param}" />');
+        $builder = new CodeDefinitionBuilder('img', '<img class="bbcode-img" src="{param}" />');
         $builder->setUseOption(false)->setParseContent(false)->setBodyValidator($urlValidator);
         array_push($this->definitions, $builder->build());
 
-        /* [img=alt text] image tag */
+        /*
         $builder = new CodeDefinitionBuilder('img', '<img src="{param}" alt="{option}" />');
         $builder->setUseOption(true)->setParseContent(false)->setBodyValidator($urlValidator);
-        array_push($this->definitions, $builder->build());
+        array_push($this->definitions, $builder->build());*/
 
         /* [color] color tag */
         $builder = new CodeDefinitionBuilder('color', '<span style="color: {option}">{param}</span>');

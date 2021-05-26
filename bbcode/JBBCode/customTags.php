@@ -3,6 +3,7 @@
 require_once 'validators/EmailValidator.php';
 require_once 'validators/FontsizeValidator.php';
 require_once 'validators/FontValidator.php';
+require_once 'validators/YoutubeValidator.php';
 
 //preskrtnuti
 $builder = new JBBCode\CodeDefinitionBuilder('s', '<s>{param}</s>');
@@ -58,4 +59,5 @@ $parser->addCodeDefinition($builder->build());
 
 //youtube
 $builder = new JBBCode\CodeDefinitionBuilder('youtube', "<div class=\"video-container\"><div class=\"video-wrap\"><iframe class=\"video\" width=\"640\" height=\"390\" src=\"http://www.youtube.com/embed/{param}\" frameborder=\"0\" allowfullscreen></iframe></div></div>");
+$builder->setUseOption(false)->setParseContent(false)->setBodyValidator(new \JBBCode\validators\YoutubeValidator());
 $parser->addCodeDefinition($builder->build());
