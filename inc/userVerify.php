@@ -13,6 +13,7 @@ $userEmail = ''; //uzivateluv email
 $userDescription = ''; //uzivateluv popis
 $userProfilePictureFile = ''; //nazev souboru profilovky
 $userBannerFile = ''; //nazev souboru banneru
+$userDescriptionAsSignature = 0; //jestli zobrazovat popis pod prispevky
 
 #region kontrola existence uzivatele v databazi a zjisteni nekterych informaci pro budouci pouziti
 if(isset($_SESSION['user_id'])) {
@@ -49,6 +50,7 @@ if(isset($_SESSION['user_id'])) {
             $userDescription = $user['description'];
             $userProfilePictureFile = $user['picture_file'];
             $userBannerFile = $user['banner_file'];
+            $userDescriptionAsSignature = $user['desc_as_signature'];
         }
     }
 }

@@ -19,10 +19,18 @@ $textAreaContent = $userDescription;
 if(isset($_POST['description'])) {
     $newDescription = trim($_POST['description']);
     if(mb_strlen($newDescription, 'UTF-8') <= $configUserMaxDescriptionLen) {
-        $descriptionQuery=$db->prepare('UPDATE '.$configDatabaseTableUsers.' SET description=:description WHERE user_id=:user_id LIMIT 1;');
+        $asSignature = 0;
+        if(isset($_POST['signature'])) {
+            if($_POST['signature'] === 'yes') {
+                $asSignature = 1;
+            }
+        }
+
+        $descriptionQuery=$db->prepare('UPDATE '.$configDatabaseTableUsers.' SET description=:description, desc_as_signature=:desc_as_signature WHERE user_id=:user_id LIMIT 1;');
         $descriptionQuery->execute([
             ':user_id' => $_SESSION['user_id'],
-            ':description' => $newDescription
+            ':description' => $newDescription,
+            ':desc_as_signature' => $asSignature
         ]);
 
         header("Location: profile.php?user=".$userName);
@@ -51,13 +59,14 @@ echo '<div class="main-wrap">
                 <textarea id="description" name="description" rows="10" class="description-edit-textarea" placeholder="Zadejte popis..." autofocus>'.htmlspecialchars($textAreaContent).'</textarea>
                 '.(!empty($errors['description'])?'<div class="input-error">'.$errors['description'].'</div>':'').'
                 <br>
+                <input type="checkbox" name="signature" value="yes" '.(($userDescriptionAsSignature)?'checked':'').'>
+                <label for="signature">Zobrazovat popis pod každým mým příspěvkem</label><br><br>
                 <div class="buttons-wrap">
                     <input type="submit" value="Uložit" class="button-primary">
                     <a href="profile.php?user='.htmlspecialchars($userName).'" class="button-secondary">Zpět</a>
                 </div>
             </form>
         </div>';
-
 
 #region konec
 //nacteni footeru
