@@ -30,7 +30,13 @@ class ImageEmbed extends JBBCode\CodeDefinition {
 
         $imgUrlValid = (bool) filter_var($content, FILTER_VALIDATE_URL);
         if($imgUrlValid && $sizesOk) {
-            return '<img src="'.htmlspecialchars($content).'" alt="Uživatelem vložený obrázek" width="'.htmlspecialchars($sizes[1]).'" height="'.htmlspecialchars($sizes[2]).'">';
+            //return '<div style="background-color: yellow; max-width: '.htmlspecialchars($sizes[1]).'px; max-height: '.htmlspecialchars($sizes[2]).'px;"><img class="bbcode-img2" src="'.htmlspecialchars($content).'" alt="Uživatelem vložený obrázek"></div>';
+            if($sizes[1] === $sizes[2]) { //zachovat aspect ratio
+                return '<div style="max-width: '.htmlspecialchars($sizes[1]).'px;"><img style="object-fit: cover; width: 100%;" src="'.htmlspecialchars($content).'" /></div>';
+            }
+            else { //nezachovat aspect ratio
+                return '<div style="background-color: lightgray; max-width: '.htmlspecialchars($sizes[1]).'px; height: '.htmlspecialchars($sizes[2]).'px; background-size: 100% 100%; background-repeat: no-repeat; background-position: center; background-image: url('.htmlspecialchars($content).');"></div>';
+            }
         }
         else {
             return $el->getAsBBCode();
