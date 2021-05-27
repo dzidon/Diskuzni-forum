@@ -30,6 +30,10 @@ header {
     margin: 0 auto 0 auto;
 }
 
+.header-text {
+    color:black;
+}
+
 .header-logo-icon {
     color: #0040ff;
     font-size: 24px;
@@ -674,7 +678,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 300px;
+    width: auto; /*300*/
     padding-right: 10px;
     border-right: 1px solid #e7e7e7;
     word-break: break-all;
@@ -694,7 +698,11 @@ a:hover {
 }
 
 .post-author-name {
-    font-size: 18px;
+    font-size: 16px; /*18*/
+}
+
+.post-user-signature {
+    margin-top: 10px;
 }
 
 .post-edit {
@@ -707,6 +715,7 @@ a:hover {
 }
 
 .post-author-stat {
+    display: none;
     font-size: 14px;
 }
 
@@ -826,5 +835,20 @@ a:hover {
 
     .file-choose-button {
         margin-bottom: 0;
+    }
+
+    .post-author-stat {
+        display: initial;
+    }
+
+    .post-wrap-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 300px;
+    }
+
+    .post-author-name {
+        font-size: 18px;
     }
 }

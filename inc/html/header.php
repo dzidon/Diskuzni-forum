@@ -27,9 +27,9 @@
     <!-- Header -->
     <header>
         <div class="header-wrap">
-            <div class="header-logo">
-                <i class="fas fa-user-graduate header-logo-icon"></i>FÓRUM
-            </div>
+            <a href="index.php" class="header-logo">
+                <i class="fas fa-user-graduate header-logo-icon"></i><span class="header-text">FÓRUM</span>
+            </a>
             <nav>
                 <?php
                     if(isset($_SESSION['user_id'])) { //prihlasen

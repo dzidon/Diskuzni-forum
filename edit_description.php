@@ -68,6 +68,7 @@ echo '<div class="main-wrap">
             </form>
         </div>';
 
+
 #region konec
 //nacteni footeru
 include "inc/html/footer.php";
