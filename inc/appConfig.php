@@ -26,6 +26,9 @@ $configUserPasswordInterval = 600; //jak dlouho bude trvat, nez si uzivatel bude
 $configUserMaxProfilePictureSize = 500000; // 500000 = 500 KB
 $configUserMaxBannerSize = 1000000; // 1000000 = 1000 KB
 
+//vyhledavani
+$configSearchMaxUsers = 30; //kolik uzivatelskych uctu se muze maximalne zobrazit pri jednom hledani
+
 //odkazy
 $configUserNoProfilePicture = 'noprofilepic.png';
 $configUserNoBanner = 'default-banner.jpg';

@@ -24,7 +24,7 @@ include "inc/html/header.php";
 
 
 //nacteni nekolika uzivatelu podle hledaneho vyrazu
-$userSearch=$db->prepare('SELECT * FROM '.$configDatabaseTableUsers.' WHERE name LIKE :word LIMIT 30;');
+$userSearch=$db->prepare('SELECT * FROM '.$configDatabaseTableUsers.' WHERE name LIKE :word LIMIT '.$configSearchMaxUsers.';');
 $userSearch->execute([
     ':word' => '%'.$searched.'%'
 ]);
