@@ -237,6 +237,7 @@ a:hover {
 .section-post-name {
     font-size: 18px;
     font-weight: 700;
+    word-break: break-all;
 }
 
 .section-post-name:hover {

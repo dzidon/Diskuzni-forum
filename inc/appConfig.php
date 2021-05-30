@@ -9,6 +9,8 @@ $configDatabaseCharset = 'utf8';
 //nazvy tabulek v databazi
 $configDatabaseTableUsers = 'sp_users';
 $configDatabaseTableForgottenPass = 'sp_forgotten_passwords';
+$configDatabaseTableSections = 'sp_sections';
+$configDatabaseTablePosts = 'sp_posts';
 
 //nazvy uzivatelskych roli
 $configRoleUser = 'user';
@@ -25,6 +27,9 @@ $configUserActivationInterval = 600; //jak dlouho bude trvat, nez si uzivatel bu
 $configUserPasswordInterval = 600; //jak dlouho bude trvat, nez si uzivatel bude moct poslat email na obnovu hesla
 $configUserMaxProfilePictureSize = 500000; // 500000 = 500 KB
 $configUserMaxBannerSize = 1000000; // 1000000 = 1000 KB
+
+//omezeni prispevku
+$configHomepageMaxPosts = 5; //kolik se ma maximalne zobrazovat prispevku s posledni aktivitou na hlavni strance v jedne sekci
 
 //vyhledavani
 $configSearchMaxUsers = 30; //kolik uzivatelskych uctu se muze maximalne zobrazit pri jednom hledani
