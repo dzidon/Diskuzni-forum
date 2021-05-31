@@ -33,6 +33,7 @@ $configHomepageMaxPosts = 5; //kolik se ma maximalne zobrazovat prispevku s posl
 
 //vyhledavani
 $configSearchMaxUsers = 30; //kolik uzivatelskych uctu se muze maximalne zobrazit pri jednom hledani
+$configSearchMaxPosts = 30; //kolik temat se muze maximalne zobrazit pri jednom hledani
 
 //odkazy
 $configUserNoProfilePicture = 'noprofilepic.png';

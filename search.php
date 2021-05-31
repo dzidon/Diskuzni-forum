@@ -24,13 +24,25 @@ include "inc/html/header.php";
 
 
 //nacteni nekolika uzivatelu podle hledaneho vyrazu
-$userSearch=$db->prepare('SELECT * FROM '.$configDatabaseTableUsers.' WHERE name LIKE :word LIMIT '.$configSearchMaxUsers.';');
+$userSearch=$db->prepare('SELECT * FROM '.$configDatabaseTableUsers.' WHERE name LIKE :word ORDER BY name ASC LIMIT '.$configSearchMaxUsers.';');
 $userSearch->execute([
     ':word' => '%'.$searched.'%'
 ]);
 
 //nacteni nekolika prispevku podle hledaneho vyrazu
-//TODO: sql dotaz
+$postsSearch=$db->prepare('SELECT 
+        threads.post_id AS thread_post_id, threads.section_id AS thread_section_id, threads.user_id AS thread_user_id, threads.name AS thread_name, threads.created AS thread_created, threads.pinned AS thread_pinned, threads.locked AS thread_locked, threads.views AS thread_views, replies.post_id AS reply_post_id, replies.user_id AS reply_user_id, replies.created AS reply_created 
+        FROM '.$configDatabaseTablePosts.' AS threads 
+        LEFT JOIN (
+            SELECT * FROM sp_posts 
+            WHERE (post_parent_id,created) IN 
+            ( SELECT post_parent_id, MAX(created) FROM sp_posts GROUP BY post_parent_id )
+        ) AS replies ON threads.post_id = replies.post_parent_id 
+        WHERE threads.post_parent_id=threads.post_id AND threads.name LIKE :word
+        ORDER BY reply_created DESC LIMIT '.$configSearchMaxPosts.';');
+$postsSearch->execute([
+    ':word' => '%'.$searched.'%'
+]);
 
 echo '<div class="main-wrap">
         <h1>Výsledky vyhledávání pro "'.htmlspecialchars($searched).'"</h1>
@@ -75,8 +87,27 @@ echo '<div class="main-wrap">
 
         echo '<div class="section-header-wrap">
                 <div class="section-header-name"><i class="far fa-comments section-header-icon"></i>Témata</div>
-              </div>
-              <div class="section-error-noposts">Nebyla nalezena žádná témata odpovídající hledanému výrazu.</div>';
+              </div>';
+
+        //výpis všech nalezených příspěvků
+        $count = $postsSearch->rowCount();
+        if($count == 0) {
+            echo '<div class="section-error-noposts">Nebyla nalezena žádná témata odpovídající hledanému výrazu.</div>';
+        }
+        else {
+            //načteme si funkci pro vykreslení odkazu na post
+            require_once "inc/functionRenderPost.php";
+
+            $posts = $postsSearch->fetchAll(PDO::FETCH_ASSOC);
+            $i = 0;
+            foreach($posts as $post) {
+                $i++;
+                renderPost($post, $db, $configDatabaseTablePosts, $configDatabaseTableUsers);
+                if($i != $count) {
+                    echo'<div class="line"></div>';
+                }
+            }
+        }
 
 echo '</div>';
 
