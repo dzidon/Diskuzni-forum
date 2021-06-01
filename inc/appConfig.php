@@ -28,12 +28,11 @@ $configUserPasswordInterval = 600; //jak dlouho bude trvat, nez si uzivatel bude
 $configUserMaxProfilePictureSize = 500000; // 500000 = 500 KB
 $configUserMaxBannerSize = 1000000; // 1000000 = 1000 KB
 
-//omezeni prispevku
+//omezeni zobrazovani prispevku
 $configHomepageMaxPosts = 5; //kolik se ma maximalne zobrazovat prispevku s posledni aktivitou na hlavni strance v jedne sekci
-
-//vyhledavani
 $configSearchMaxUsers = 30; //kolik uzivatelskych uctu se muze maximalne zobrazit pri jednom hledani
 $configSearchMaxPosts = 30; //kolik temat se muze maximalne zobrazit pri jednom hledani
+$configProfileMaxPosts = 30; //kolik temat se muze maximalne zobrazit v posledni aktivite na uzivatelskem profilu
 
 //odkazy
 $configUserNoProfilePicture = 'noprofilepic.png';

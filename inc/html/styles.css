@@ -206,6 +206,7 @@ a:hover {
 
 .section-post-image-reply {
     border: 2px solid white;
+    background-color: white;
     position: absolute;
     top: 22px;
     left: 22px;

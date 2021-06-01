@@ -154,6 +154,31 @@ if($userExists) {
         }
     }
 
+    //zjisteni poctu zalozenych temat
+    $postsCreated = "0";
+    $postsCountQuery=$db->prepare('SELECT COUNT(post_id) AS threads FROM '.$configDatabaseTablePosts.' WHERE post_id=post_parent_id AND user_id=:user_id;');
+    $postsCountQuery->execute([
+        ':user_id' => $profile['user_id']
+    ]);
+    if($postsCountQuery->rowCount() == 1) {
+        $result = $postsCountQuery->fetch();
+        $postsCreated = $result['threads'];
+    }
+
+    //zjisteni poctu odpovedi
+    $postsReplied = "0";
+    $postsCountQuery=$db->prepare('SELECT COUNT(post_id) AS replies FROM '.$configDatabaseTablePosts.' WHERE post_id!=post_parent_id AND user_id=:user_id;');
+    $postsCountQuery->execute([
+        ':user_id' => $profile['user_id']
+    ]);
+    if($postsCountQuery->rowCount() == 1) {
+        $result = $postsCountQuery->fetch();
+        $postsReplied = $result['replies'];
+    }
+
+    //celkovy pocet prispevku
+    $postsTotal = $postsCreated+$postsReplied;
+
     //role
     $profileRoleName = 'Uživatel';
     if($profile['role'] === $configRoleAdmin) $profileRoleName = 'Administrátor';
@@ -251,7 +276,7 @@ if($userExists) {
                     Založených témat
                 </div>
                 <div class="stat-right">
-                    todo
+                    '.htmlspecialchars($postsCreated).'
                 </div>
             </div>
             <div class="line"></div>
@@ -262,7 +287,7 @@ if($userExists) {
                     Napsáno odpovědí
                 </div>
                 <div class="stat-right">
-                    todo
+                    '.htmlspecialchars($postsReplied).'
                 </div>
             </div>
             <div class="line"></div>
@@ -273,7 +298,7 @@ if($userExists) {
                     Celkem příspěvků
                 </div>
                 <div class="stat-right">
-                    todo
+                    '.htmlspecialchars($postsTotal).'
                 </div>
             </div>
             <div class="line"></div>
@@ -293,8 +318,40 @@ if($userExists) {
                 <div class="section-header-name"><i class="far fa-comments section-header-icon"></i>Nedávná aktivita</div>
             </div>';
 
-    //TODO: temata (posledni aktivita)
-    echo '<div class="section-error-noposts">Nenalezeny žádné příspěvky.</div>';
+    //nacteni posledni aktivity uzivatele
+    $lastActivityQuery=$db->prepare('SELECT 
+        threads.post_id AS thread_post_id, threads.section_id AS thread_section_id, threads.user_id AS thread_user_id, threads.name AS thread_name, threads.created AS thread_created, threads.pinned AS thread_pinned, threads.locked AS thread_locked, threads.views AS thread_views, replies.post_id AS reply_post_id, replies.user_id AS reply_user_id, replies.created AS reply_created 
+        FROM '.$configDatabaseTablePosts.' AS threads 
+        LEFT JOIN (
+            SELECT * FROM sp_posts 
+            WHERE (post_parent_id,created) IN 
+            ( SELECT post_parent_id, MAX(created) FROM sp_posts GROUP BY post_parent_id )
+        ) AS replies ON threads.post_id = replies.post_parent_id 
+        WHERE threads.post_parent_id=threads.post_id AND (threads.user_id=:user_id OR replies.user_id=:user_id)
+        ORDER BY reply_created DESC LIMIT '.$configProfileMaxPosts.';');
+    $lastActivityQuery->execute([
+        ':user_id' => $profile['user_id']
+    ]);
+
+    //výpis všech nalezených příspěvků
+    $count = $lastActivityQuery->rowCount();
+    if($count == 0) {
+        echo '<div class="section-error-noposts">Nenalezeny žádné příspěvky.</div>';
+    }
+    else {
+        //načteme si funkci pro vykreslení odkazu na post
+        require_once "inc/functionRenderPost.php";
+
+        $posts = $lastActivityQuery->fetchAll(PDO::FETCH_ASSOC);
+        $i = 0;
+        foreach($posts as $post) {
+            $i++;
+            renderPost($post, $db, $configDatabaseTablePosts, $configDatabaseTableUsers, 0);
+            if($i != $count) {
+                echo'<div class="line"></div>';
+            }
+        }
+    }
 
     echo '</div>';
 }

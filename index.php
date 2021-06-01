@@ -66,7 +66,7 @@ if($sectionsQuery->rowCount() > 0) {
             $i = 0;
             foreach($posts as $post) {
                 $i++;
-                renderPost($post, $db, $configDatabaseTablePosts, $configDatabaseTableUsers);
+                renderPost($post, $db, $configDatabaseTablePosts, $configDatabaseTableUsers, 0);
                 if($i != $count) {
                     echo'<div class="line"></div>';
                 }
