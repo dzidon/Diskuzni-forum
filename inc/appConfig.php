@@ -32,7 +32,7 @@ $configUserMaxBannerSize = 1000000; // 1000000 = 1000 KB
 $configHomepageMaxPosts = 5; //kolik se ma maximalne zobrazovat prispevku s posledni aktivitou na hlavni strance v jedne sekci
 $configSearchMaxUsers = 30; //kolik uzivatelskych uctu se muze maximalne zobrazit pri jednom hledani
 $configSearchMaxPosts = 30; //kolik temat se muze maximalne zobrazit pri jednom hledani
-$configProfileMaxPosts = 30; //kolik temat se muze maximalne zobrazit v posledni aktivite na uzivatelskem profilu
+$configProfileMaxPosts = 20; //kolik temat se muze maximalne zobrazit v posledni aktivite na uzivatelskem profilu
 
 //odkazy
 $configUserNoProfilePicture = 'noprofilepic.png';

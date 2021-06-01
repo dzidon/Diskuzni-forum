@@ -34,9 +34,9 @@ $postsSearch=$db->prepare('SELECT
         threads.post_id AS thread_post_id, threads.section_id AS thread_section_id, threads.user_id AS thread_user_id, threads.name AS thread_name, threads.created AS thread_created, threads.pinned AS thread_pinned, threads.locked AS thread_locked, threads.views AS thread_views, replies.post_id AS reply_post_id, replies.user_id AS reply_user_id, replies.created AS reply_created 
         FROM '.$configDatabaseTablePosts.' AS threads 
         LEFT JOIN (
-            SELECT * FROM sp_posts 
+            SELECT * FROM '.$configDatabaseTablePosts.' 
             WHERE (post_parent_id,created) IN 
-            ( SELECT post_parent_id, MAX(created) FROM sp_posts GROUP BY post_parent_id )
+            ( SELECT post_parent_id, MAX(created) FROM '.$configDatabaseTablePosts.' GROUP BY post_parent_id )
         ) AS replies ON threads.post_id = replies.post_parent_id 
         WHERE threads.post_parent_id=threads.post_id AND threads.name LIKE :word
         ORDER BY reply_created DESC LIMIT '.$configSearchMaxPosts.';');
