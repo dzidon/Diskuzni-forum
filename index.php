@@ -62,7 +62,17 @@ if($sectionsQuery->rowCount() > 0) {
         echo '</div>';
 
         if($count == 0) {
-            echo '<div class="section-error-noposts">V této sekci nejsou žádná témata, <a href="odkazNaVytvoreniPrispevku" class="section-link-newpost">napište nové</a>.</div>';
+            if(isset($_SESSION['user_id'])) {
+                if($userActivated) {
+                    echo '<div class="section-error-noposts">V této sekci nejsou žádná témata, <a href="odkazNaVytvoreniPrispevku" class="section-link-newpost">napište nové</a>.</div>';
+                }
+                else {
+                    echo '<div class="section-error-noposts">V této sekci nejsou žádná témata, aktivujte svůj účet a napište nové.</div>';
+                }
+            }
+            else {
+                echo '<div class="section-error-noposts">V této sekci nejsou žádná témata, <a href="login.php" class="section-link-newpost">přihlaste se</a> a napište nové.</div>';
+            }
         }
         else {
             $posts = $postsQuery->fetchAll(PDO::FETCH_ASSOC);

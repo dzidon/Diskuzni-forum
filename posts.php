@@ -28,7 +28,12 @@ if(isset($_GET['section'])) {
 else $error = 'V odkazu chybí sekce.';
 
 //nastaveni title a nacteni headeru
-$pageTitle = 'Domů';
+if(isset($section['name'])) {
+    $pageTitle = $section['name'];
+}
+else {
+    $pageTitle = 'Sekce nenalezena';
+}
 include "inc/html/header.php";
 #endregion zacatek
 
@@ -37,6 +42,7 @@ echo '<div class="main-wrap">';
 
 if(mb_strlen($error, 'utf-8') == 0) {
     $offset = 0;
+    $page = 1;
     if(isset($_GET['page'])) {
         if(is_numeric($_GET['page'])) {
             $page = (int) $_GET['page'];
@@ -62,22 +68,41 @@ if(mb_strlen($error, 'utf-8') == 0) {
     $postsQuery->execute();
 
     //vypsani poslednich prispevku v sekci
-    $count = $postsQuery->rowCount();
+    $count = $postsQuery->rowCount(); //pocet vykreslovanych prispevku na dane strance
     if($count > 0) {
         echo '<h1>Příspěvky</h1>
                   <div class="section-header-wrap">
-                    <div class="section-header-name"><i class="far fa-comments section-header-icon"></i>'.htmlspecialchars($section['name']).'</div>
-                    <a href="new" class="section-header-button">Nové téma</a>
-                  </div>';
+                    <div class="section-header-name"><i class="far fa-comments section-header-icon"></i>'.htmlspecialchars($section['name']).'</div>';
+        if(isset($_SESSION['user_id']) && $userActivated) {
+            echo '<a href="new" class="section-header-button">Nové téma</a>';
+        }
+        echo '</div>';
+
+        //zjisteni celkoveho poctu temat v sekci
+        $threadsQuery=$db->prepare('SELECT COUNT(post_id) AS total_threads FROM '.$configDatabaseTablePosts.' WHERE post_parent_id=post_id AND section_id=:section_id;');
+        $threadsQuery->execute([
+            ":section_id" => $section['section_id']
+        ]);
+        $result = $threadsQuery->fetch();
+
+        //vytvoreni tlacitek na strankovani
+        $totalPages = $result['total_threads']/$configSectionPageMaxPosts;
+        $buttons = array();
+        for($i = 2; $i >= 1; $i--) { //zkontrolujeme, jestli existuje i stranek pred aktualni strankou
+            if($page-$i >= 1) array_push($buttons, array($page-$i, false));
+        }
+        array_push($buttons, array($page, true)); //aktualni stranka
+        for($i = 1; $i <= 2; $i++) { //zkontrolujeme, jestli existuje i stranek po aktualni strance
+            if($page+$i <= $totalPages) array_push($buttons, array($page+$i, false));
+        }
 
         //strankovani nahore
-        echo '<div class="post-pages">
-                <a href="odkazNaStranku" class="post-page-number">1</a>
-                <a href="odkazNaStranku" class="post-page-number">2</a>
-                <a href="odkazNaStranku" class="post-page-number-current">3</a>
-                <a href="odkazNaStranku" class="post-page-number">128</a>
-              </div>
-              <div class="line"></div>';
+        echo '<div class="post-pages">';
+        foreach($buttons as $button) {
+            echo '<a href="posts.php?section='.htmlspecialchars($section['section_id']).'&page='.htmlspecialchars($button[0]).'" class="'.( $button[1] ? 'post-page-number-current':'post-page-number').'">'.htmlspecialchars($button[0]).'</a>';
+        }
+        echo '</div>';
+        echo '<div class="line"></div>';
 
         //načteme si funkci pro vykreslení odkazu na post
         require_once "inc/functionRenderPost.php";
