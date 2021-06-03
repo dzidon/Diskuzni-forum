@@ -354,6 +354,13 @@ a:hover {
     color: white;
 }
 
+.post-page-gap {
+    padding: 0 5px 0 5px;
+    color: #7097ff;
+    font-size: 24px;
+    margin-right: 5px;
+}
+
 
 /*
     Profile

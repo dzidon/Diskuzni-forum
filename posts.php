@@ -44,7 +44,7 @@ if(mb_strlen($error, 'utf-8') == 0) {
     $offset = 0;
     $page = 1;
     if(isset($_GET['page'])) {
-        if(is_numeric($_GET['page'])) {
+        if(is_numeric($_GET['page']) && $_GET['page'] >= 1) {
             $page = (int) $_GET['page'];
             if($page >= 2) {
                 $offset = ($page-1)*$configSectionPageMaxPosts;
@@ -88,20 +88,43 @@ if(mb_strlen($error, 'utf-8') == 0) {
         //vytvoreni tlacitek na strankovani
         $totalPages = $result['total_threads']/$configSectionPageMaxPosts;
         $buttons = array();
-        for($i = 2; $i >= 1; $i--) { //zkontrolujeme, jestli existuje i stranek pred aktualni strankou
+
+        if($page == 1) { $leftPages = 0; $rightPages = 4; }
+        else if($page == 2) { $leftPages = 1; $rightPages = 3; }
+        else if($page == $totalPages) { $leftPages = 4; $rightPages = 0; }
+        else if($page == $totalPages-1) { $leftPages = 3; $rightPages = 1; }
+        else { $leftPages = 2; $rightPages = 2; }
+
+        for($i = $leftPages; $i >= 1; $i--) { //zkontrolujeme, jestli existuje i stranek pred aktualni strankou
             if($page-$i >= 1) array_push($buttons, array($page-$i, false));
         }
         array_push($buttons, array($page, true)); //aktualni stranka
-        for($i = 1; $i <= 2; $i++) { //zkontrolujeme, jestli existuje i stranek po aktualni strance
+        for($i = 1; $i <= $rightPages; $i++) { //zkontrolujeme, jestli existuje i stranek po aktualni strance
             if($page+$i <= $totalPages) array_push($buttons, array($page+$i, false));
         }
 
+        $pageNavigation = '';
+
         //strankovani nahore
-        echo '<div class="post-pages">';
-        foreach($buttons as $button) {
-            echo '<a href="posts.php?section='.htmlspecialchars($section['section_id']).'&page='.htmlspecialchars($button[0]).'" class="'.( $button[1] ? 'post-page-number-current':'post-page-number').'">'.htmlspecialchars($button[0]).'</a>';
+        $pageNavigation .= '<div class="post-pages">';
+        if(!empty($buttons[0][0]) && $buttons[0][0] != 1) {
+            $pageNavigation .= '<a href="posts.php?section='.htmlspecialchars($section['section_id']).'&page=1" class="post-page-number">1</a>';
+            if($buttons[0][0] > 2) {
+                $pageNavigation .= '<div class="post-page-gap">...</div>';
+            }
         }
-        echo '</div>';
+        foreach($buttons as $button) {
+            $pageNavigation .= '<a href="posts.php?section='.htmlspecialchars($section['section_id']).'&page='.htmlspecialchars($button[0]).'" class="'.( $button[1] ? 'post-page-number-current':'post-page-number').'">'.htmlspecialchars($button[0]).'</a>';
+        }
+        if(!empty($buttons[4][0]) && $buttons[4][0] != $totalPages) {
+            if($buttons[4][0] < $totalPages-1) {
+                $pageNavigation .= '<div class="post-page-gap">...</div>';
+            }
+            $pageNavigation .= '<a href="posts.php?section='.htmlspecialchars($section['section_id']).'&page='.htmlspecialchars($totalPages).'" class="post-page-number">'.htmlspecialchars($totalPages).'</a>';
+        }
+        $pageNavigation .= '</div>';
+
+        echo $pageNavigation;
         echo '<div class="line"></div>';
 
         //načteme si funkci pro vykreslení odkazu na post
@@ -119,13 +142,8 @@ if(mb_strlen($error, 'utf-8') == 0) {
         }
 
         //strankovani dole
-        echo '<div class="line"></div>
-              <div class="post-pages">
-                <a href="odkazNaStranku" class="post-page-number">1</a>
-                <a href="odkazNaStranku" class="post-page-number">2</a>
-                <a href="odkazNaStranku" class="post-page-number-current">3</a>
-                <a href="odkazNaStranku" class="post-page-number">128</a>
-              </div>';
+        echo '<div class="line"></div>';
+        echo $pageNavigation;
     }
     else {
         echo '<h1>Chyba</h1>Nenalezeny žádné příspěvky.';
