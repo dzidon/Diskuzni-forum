@@ -88,6 +88,13 @@ if($sectionsQuery->rowCount() > 0) {
     }
 }
 
+//tlacitko na vytvoreni nove sekce
+if($userRole === $configRoleAdmin) {
+    echo '<a href="new_section.php" class="section-header-new">
+           <div class="section-header-name"><i class="fas fa-folder-plus section-header-icon"></i>Nová sekce</div>
+      </a>';
+}
+
 echo '</div>';
 
 
