@@ -26,16 +26,10 @@ if(isset($_POST['name'])) {
                     ':name'=>$newName
                 ]);
 
-                if ($nameQuery->rowCount() > 0) {
-                    $user = $nameQuery->fetch();
-                    if($user['user_id'] != $_SESSION['user_id']) {
-                        $errors['name'] = 'Zadanou přezdívku už má někdo jiný.';
-                        $inputContent = $newName;
-                    }
-                    else {
-                        header("Location: profile.php?user=".$userName);
-                        exit();
-                    }
+                $user = $nameQuery->fetch();
+                if ($nameQuery->rowCount() > 0 && $user['user_id'] != $_SESSION['user_id']) {
+                    $errors['name'] = 'Zadanou přezdívku už má někdo jiný.';
+                    $inputContent = $newName;
                 }
                 else {
                     $updateQuery=$db->prepare('UPDATE '.$configDatabaseTableUsers.' SET name=:name WHERE user_id=:user_id LIMIT 1;');

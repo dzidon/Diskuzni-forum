@@ -67,7 +67,7 @@ if($sectionsQuery->rowCount() > 0) {
                     echo '<div class="section-error-noposts">V této sekci nejsou žádná témata, <a href="odkazNaVytvoreniPrispevku" class="section-link-newpost">napište nové</a>.</div>';
                 }
                 else {
-                    echo '<div class="section-error-noposts">V této sekci nejsou žádná témata, aktivujte svůj účet a napište nové.</div>';
+                    echo '<div class="section-error-noposts">V této sekci nejsou žádná témata, <a href="account_not_activated.php" class="section-link-newpost">aktivujte svůj účet</a> a napište nové.</div>';
                 }
             }
             else {

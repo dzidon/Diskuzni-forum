@@ -57,7 +57,7 @@ echo '<div class="main-wrap main-wrap-small">
             <h1>Vytvořit sekci</h1>
             <form action="" method="post">
                 <label for="name">Zadejte název sekce:</label><br>
-                <input type="text" id="name" name="name" class="user-input" size="40">
+                <input type="text" id="name" name="name" class="user-input" size="40" value="'.htmlspecialchars(@$_POST['name']).'">
                 '.(!empty($errors['name'])?'<div class="input-error">'.$errors['name'].'</div>':'<br>').'
                 <br>
                 <div class="buttons-wrap buttons-center">

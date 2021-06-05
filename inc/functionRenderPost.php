@@ -43,7 +43,7 @@ function renderPost($post, $dbLocal, $tablePosts, $tableUsers, $showPin)
                         </div>
     
                         <div class="section-post-links">
-                            <a href="odkazNaPost" class="section-post-name">' . ($showPin && $post['thread_pinned'] ? '<i class="fas fa-thumbtack section-post-pin"></i>' : '') . ($post['thread_locked'] ? '<i class="fas fa-lock section-post-lock"></i>' : '') . htmlspecialchars($post['thread_name']) . '</a>
+                            <a href="thread.php?id='.htmlspecialchars($post['thread_post_id']).'&page=1" class="section-post-name">' . ($showPin && $post['thread_pinned'] ? '<i class="fas fa-thumbtack section-post-pin"></i>' : '') . ($post['thread_locked'] ? '<i class="fas fa-lock section-post-lock"></i>' : '') . htmlspecialchars($post['thread_name']) . '</a>
                             <span class="section-post-info">
                                 Založil <a class="section-post-user" href="profile.php?user=' . htmlspecialchars($creatorName) . '">' . htmlspecialchars($creatorName) . '</a> ' . htmlspecialchars($activityDate) . '
                             </span>
@@ -82,7 +82,7 @@ function renderPost($post, $dbLocal, $tablePosts, $tableUsers, $showPin)
                     </div>
 
                     <div class="section-post-links">
-                        <a href="odkazNaPost" class="section-post-name">' . ($showPin && $post['thread_pinned'] ? '<i class="fas fa-thumbtack section-post-pin"></i>' : '') . ($post['thread_locked'] ? '<i class="fas fa-lock section-post-lock"></i>' : '') . htmlspecialchars($post['thread_name']) . '</a>
+                        <a href="thread.php?id='.htmlspecialchars($post['thread_post_id']).'&page=1" class="section-post-name">' . ($showPin && $post['thread_pinned'] ? '<i class="fas fa-thumbtack section-post-pin"></i>' : '') . ($post['thread_locked'] ? '<i class="fas fa-lock section-post-lock"></i>' : '') . htmlspecialchars($post['thread_name']) . '</a>
                         <span class="section-post-info">
                             Odpověděl <a class="section-post-user" href="profile.php?user=' . htmlspecialchars($replyUserName) . '">' . htmlspecialchars($replyUserName) . '</a> ' . htmlspecialchars($activityDate) . '
                         </span>
