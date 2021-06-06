@@ -64,7 +64,7 @@ if($sectionsQuery->rowCount() > 0) {
         if($count == 0) {
             if(isset($_SESSION['user_id'])) {
                 if($userActivated) {
-                    echo '<div class="section-error-noposts">V této sekci nejsou žádná témata, <a href="odkazNaVytvoreniPrispevku" class="section-link-newpost">napište nové</a>.</div>';
+                    echo '<div class="section-error-noposts">V této sekci nejsou žádná témata, <a href="new_topic.php?section='.htmlspecialchars($section['section_id']).'" class="section-link-newpost">napište nové</a>.</div>';
                 }
                 else {
                     echo '<div class="section-error-noposts">V této sekci nejsou žádná témata, <a href="account_not_activated.php" class="section-link-newpost">aktivujte svůj účet</a> a napište nové.</div>';

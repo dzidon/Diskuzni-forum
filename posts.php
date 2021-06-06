@@ -74,7 +74,7 @@ if(mb_strlen($error, 'utf-8') == 0) {
                   <div class="section-header-wrap">
                     <div class="section-header-name"><i class="far fa-comments section-header-icon"></i>'.htmlspecialchars($section['name']).'</div>';
         if(isset($_SESSION['user_id']) && $userActivated && !$userMuted) {
-            echo '<a href="new" class="section-header-button">Nové téma</a>';
+            echo '<a href="new_topic.php?section='.htmlspecialchars($section['section_id']).'" class="section-header-button">Nové téma</a>';
         }
         echo '</div>';
 

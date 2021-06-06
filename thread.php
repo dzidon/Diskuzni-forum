@@ -27,6 +27,38 @@ if(isset($_GET['id'])) {
 }
 else $error = 'V odkazu chybí téma.';
 
+//zpracovani postu
+$errors = array();
+if(isset($_POST['new-response']) && isset($thread)) {
+    if(isset($_SESSION['user_id']) && !$thread['locked'] && $userActivated && !$userMuted) {
+        $responseText = trim($_POST['new-response']);
+        if(mb_strlen($responseText, 'utf-8') >= $configResponseMinLen && mb_strlen($responseText, 'utf-8') <= $configResponseMaxLen) {
+            $newResponseQuery=$db->prepare('INSERT INTO '.$configDatabaseTablePosts.' (`post_id`, `post_parent_id`, `user_id`, `section_id`, `name`, `text`, `created`, `pinned`, `locked`, `views`, `edited`) VALUES (NULL, :post_parent_id, :user_id, :section_id, NULL, :text, current_timestamp(), 0, 0, 0, 0);');
+            $newResponseQuery->execute([
+                ':post_parent_id' => $thread['post_id'],
+                ':user_id' => $_SESSION['user_id'],
+                ':section_id' => $thread['section_id'],
+                ':text' => $responseText
+            ]);
+
+            //zjisteni celkoveho poctu prispevku v tematu
+            $allPostsQuery=$db->prepare('SELECT COUNT(post_id) AS total_posts FROM '.$configDatabaseTablePosts.' WHERE post_parent_id=:post_parent_id;');
+            $allPostsQuery->execute([
+                ":post_parent_id" => $thread['post_id']
+            ]);
+            $result = $allPostsQuery->fetch();
+
+            //presmerovani na posledni stranku v tematu
+            $lastPage = $result['total_posts']/$configThreadPageMaxPosts;
+            header('Location: thread.php?id='.$thread['post_id'].'&page='.$lastPage);
+            exit();
+        }
+        else {
+            $errors['response'] = 'Délka textu musí být mezi '.$configResponseMinLen.' a '.$configResponseMaxLen.' znaky.';
+        }
+    }
+}
+
 //nastaveni bbcode
 $loadBBcode = true;
 $BBcodeEditorID = 'new-response';
@@ -189,7 +221,7 @@ if(mb_strlen($error, 'utf-8') == 0) {
                         <div class="post-author-stat">Napsáno příspěvků: '.htmlspecialchars($userTotalPosts).'</div>
                         <div class="post-author-stat">Umlčen: '.( $post['user_muted'] ? 'Ano':'Ne').'</div>
                         
-                        '. ( isset($_SESSION['user_id']) && $_SESSION['user_id'] === $post['user_id'] ? '<a href="edit_post.php?id='.htmlspecialchars($post['post_id']).'" class="section-post-name post-edit">Upravit</a>':'').'
+                        '. ( isset($_SESSION['user_id']) && $_SESSION['user_id'] === $post['user_id'] && !$userMuted ? '<a href="edit_post.php?id='.htmlspecialchars($post['post_id']).'" class="section-post-name post-edit">Upravit</a>':'').'
                     </div>
                     <div class="post-wrap-right">
                         '.$parsedText. ( $post['user_desc_as_signature'] && mb_strlen($post['user_description'], 'utf-8') > 0 ? '<div class="line"></div><div class="post-user-signature">'.$parsedDescription.'</div>':'').'
@@ -210,13 +242,13 @@ if(mb_strlen($error, 'utf-8') == 0) {
                 if ($userActivated) {
                     if(!$userMuted) {
                         echo '<form action="" method="post">
-                            <label for="new-response">Odpovědět:</label>
-                            <textarea id="new-response" name="new-response" rows="10" class="description-edit-textarea"></textarea>
-                            <div class="input-error">Toto je error!</div><br>
-                            <div class="buttons-wrap">
-                                <input type="submit" value="Odpovědět" class="button-primary">
-                            </div>
-                          </form>';
+                                <label for="new-response">Odpovědět:</label>
+                                <textarea id="new-response" name="new-response" rows="10" class="description-edit-textarea">'.htmlspecialchars(@$responseText).'</textarea>
+                                '.(!empty($errors['response'])?'<div class="input-error">'.$errors['response'].'</div><br>':'<br>').'
+                                <div class="buttons-wrap">
+                                    <input type="submit" value="Odpovědět" class="button-primary">
+                                </div>
+                              </form>';
                     }
                     else {
                         echo 'Jste umlčen, nemůžete odpovědět.';
