@@ -73,7 +73,7 @@ if(mb_strlen($error, 'utf-8') == 0) {
         echo '<h1>Příspěvky</h1>
                   <div class="section-header-wrap">
                     <div class="section-header-name"><i class="far fa-comments section-header-icon"></i>'.htmlspecialchars($section['name']).'</div>';
-        if(isset($_SESSION['user_id']) && $userActivated) {
+        if(isset($_SESSION['user_id']) && $userActivated && !$userMuted) {
             echo '<a href="new" class="section-header-button">Nové téma</a>';
         }
         echo '</div>';

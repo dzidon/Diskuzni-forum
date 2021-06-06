@@ -7,19 +7,21 @@
             <script src="bbcode/icons/material.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sceditor@3/minified/formats/bbcode.min.js"></script>
             <script>
-                let textarea = document.getElementById("'.$BBcodeEditorID.'");
-                sceditor.create(textarea, {
-                    format: "bbcode",
-                    style: "https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/content/default.min.css",
-                    emoticonsRoot: "bbcode/",
-                    resizeEnabled: false,
-                    width: "100%",
-                    height: '.$BBcodeEditorHeight.',
-                    icons: "material",
-                    fonts: "Arial,Georgia,Impact,Sans-serif,Serif,Verdana",
-                    toolbarExclude: "table,bulletlist,orderedlist,horizontalrule,ltr,rtl",
-                    locale: "cs"
-                });
+                let textarea = document.getElementById("' . $BBcodeEditorID . '");
+                if (typeof(textarea) != "undefined" && textarea != null) {
+                    sceditor.create(textarea, {
+                        format: "bbcode",
+                        style: "https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/content/default.min.css",
+                        emoticonsRoot: "bbcode/",
+                        resizeEnabled: false,
+                        width: "100%",
+                        height: ' . $BBcodeEditorHeight . ',
+                        icons: "material",
+                        fonts: "Arial,Georgia,Impact,Sans-serif,Serif,Verdana",
+                        toolbarExclude: "table,bulletlist,orderedlist,horizontalrule,ltr,rtl",
+                        locale: "cs"
+                    });
+                }
             </script>';
         }
         //js na profilu

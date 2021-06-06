@@ -38,6 +38,7 @@ $configProfileMaxPosts = 20; //kolik temat se muze maximalne zobrazit v posledni
 $configSectionMinNameLen = 3;
 $configSectionMaxNameLen = 32;
 $configSectionPageMaxPosts = 1; //kolik temat se muze maximalne zobrazit na jedne strance pri rozkliknuti sekce
+$configThreadPageMaxPosts = 1; //kolik odpovedi se muze maximalne zobrazit na jedne strance pri rozkliknuti tematu
 
 //odkazy
 $configUserNoProfilePicture = 'noprofilepic.png';
