@@ -13,7 +13,7 @@ require_once "inc/userVerify.php";
 
 $mutedUserName = '';
 if(isset($_SESSION['user_id']) && isset($_GET['uid']) && isset($_GET['action'])) {
-    if($_GET['action'] === strval(0) || $_GET['action'] === strval(1)) {
+    if($_GET['action'] === "0" || $_GET['action'] === "1") {
         if($userRole === $configRoleAdmin) {
             $checkQuery=$db->prepare('SELECT * FROM '.$configDatabaseTableUsers.' WHERE user_id=:user_id LIMIT 1;');
             $checkQuery->execute([

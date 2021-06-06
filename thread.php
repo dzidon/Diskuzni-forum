@@ -71,16 +71,24 @@ if(mb_strlen($error, 'utf-8') == 0) {
         //tema a odpovedi
         echo '<div class="main-wrap">';
         echo '<div class="post-top-wrap">
-                    <h1 class="post-name">' . htmlspecialchars($thread['name']) . '</h1>
-                    <div class="post-top-admin-buttons">
-                        <a href="odkazNaPin">
-                            <i class="fas fa-thumbtack post-admin-button-pin ' . ($thread['pinned'] ? '' : 'post-admin-button-active') . '"></i>
-                        </a>
-                        <a href="odkazNaLock">
-                            <i class="fas fa-lock post-admin-button-lock ' . ($thread['locked'] ? '' : 'post-admin-button-active') . '"></i>
-                        </a>
-                    </div>
-              </div>';
+                <h1 class="post-name">' . htmlspecialchars($thread['name']) . '</h1>';
+                if($userRole === $configRoleAdmin) {
+                    $pinAction = 0;
+                    if(!$thread['pinned']) $pinAction = 1;
+
+                    $lockAction = 0;
+                    if(!$thread['locked']) $lockAction = 1;
+
+                    echo '<div class="post-top-admin-buttons">
+                            <a href="pin_post.php?id='.htmlspecialchars($thread['post_id']).'&page='.htmlspecialchars($page).'&action='.htmlspecialchars($pinAction).'">
+                                <i class="fas fa-thumbtack post-admin-button-pin ' . ($thread['pinned'] ? '' : 'post-admin-button-active') . '"></i>
+                            </a>
+                            <a href="lock_post.php?id='.htmlspecialchars($thread['post_id']).'&page='.htmlspecialchars($page).'&action='.htmlspecialchars($lockAction).'">
+                                <i class="fas fa-lock post-admin-button-lock ' . ($thread['locked'] ? '' : 'post-admin-button-active') . '"></i>
+                            </a>
+                          </div>';
+                }
+        echo '</div>';
 
         //zjisteni celkoveho poctu prispevku v tematu
         $allPostsQuery=$db->prepare('SELECT COUNT(post_id) AS total_posts FROM '.$configDatabaseTablePosts.' WHERE post_parent_id=:post_parent_id;');
