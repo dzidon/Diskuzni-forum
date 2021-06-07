@@ -11,6 +11,7 @@ require_once "inc/db.php";
 require_once "inc/userVerify.php";
 #endregion zacatek
 
+
 $mutedUserName = '';
 if(isset($_SESSION['user_id']) && isset($_GET['uid']) && isset($_GET['action'])) {
     if($_GET['action'] === "0" || $_GET['action'] === "1") {
@@ -33,6 +34,7 @@ if(isset($_SESSION['user_id']) && isset($_GET['uid']) && isset($_GET['action']))
         }
     }
 }
+
 
 //presmerovani
 if(mb_strlen($mutedUserName,'UTF-8') == 0) {

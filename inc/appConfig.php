@@ -34,15 +34,17 @@ $configSearchMaxUsers = 30; //kolik uzivatelskych uctu se muze maximalne zobrazi
 $configSearchMaxPosts = 30; //kolik temat se muze maximalne zobrazit pri jednom hledani
 $configProfileMaxPosts = 20; //kolik temat se muze maximalne zobrazit v posledni aktivite na uzivatelskem profilu
 
+//omezeni prispevku
+$configThreadNameMinLen = 3;
+$configThreadNameMaxLen = 40;
+$configResponseMinLen = 1;
+$configResponseMaxLen = 3000;
+
 //omezeni sekci
 $configSectionMinNameLen = 3;
 $configSectionMaxNameLen = 32;
 $configSectionPageMaxPosts = 1; //kolik temat se muze maximalne zobrazit na jedne strance pri rozkliknuti sekce
 $configThreadPageMaxPosts = 1; //kolik odpovedi se muze maximalne zobrazit na jedne strance pri rozkliknuti tematu
-
-//omezeni odpovedi
-$configResponseMinLen = 1;
-$configResponseMaxLen = 3000;
 
 //odkazy
 $configUserNoProfilePicture = 'noprofilepic.png';
