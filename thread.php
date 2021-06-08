@@ -206,7 +206,7 @@ if(mb_strlen($error, 'utf-8') == 0) {
             $parsedText = $parser->getAsHtml();
 
             echo '<div class="section-header-wrap">
-                    <div class="section-header-name">#'.htmlspecialchars($i).'</div>
+                    <div class="section-header-name">#'.htmlspecialchars($i).( $post['edited'] ? ' (upraveno)':'').'</div>
                     <div class="section-header-name">'.htmlspecialchars(date('d/m/Y \v H:i:s', strtotime($post['created']))).'</div>
                   </div>
     
