@@ -195,6 +195,32 @@ if(mb_strlen($error, 'utf-8') == 0) {
                 $userTotalPosts = $result['total_posts'];
             }
 
+            //pocet lajku na tomto prispevku
+            $likesQuery=$db->prepare('SELECT COUNT(post_id) as likes FROM '.$configDatabaseTableLikes.' WHERE post_id=:post_id;');
+            $likesQuery->execute([
+                ':post_id' => $post['post_id']
+            ]);
+
+            $myLikes = 0;
+            if ($likesQuery->rowCount() > 0) {
+                $result = $likesQuery->fetch();
+                $myLikes = $result['likes'];
+            }
+
+            //dal uzivatel like tomuto prispevku?
+            $likedThisPost = false;
+            if(isset($_SESSION['user_id'])) {
+                $likeQuery=$db->prepare('SELECT * FROM '.$configDatabaseTableLikes.' WHERE post_id=:post_id AND user_id=:user_id LIMIT 1;');
+                $likeQuery->execute([
+                    ':post_id' => $post['post_id'],
+                    ':user_id' => $_SESSION['user_id']
+                ]);
+
+                if ($likeQuery->rowCount() > 0) {
+                    $likedThisPost = true;
+                }
+            }
+
             //parsovani bbcode
             if($post['user_desc_as_signature']) {
                 $parser->parse(nl2br(htmlspecialchars($post['user_description'])));
@@ -225,7 +251,7 @@ if(mb_strlen($error, 'utf-8') == 0) {
                         '. ( isset($_SESSION['user_id']) && $_SESSION['user_id'] === $post['user_id'] && !$userMuted ? '<a href="edit_post.php?id='.htmlspecialchars($post['post_id']).'" class="section-post-name post-edit">Upravit</a>':'').'
                     </div>
                     <div class="post-wrap-right">
-                        <div>'.$parsedText.'</div><div class="post-like"><strong><a class="section-link-newpost" href="like_post.php?id='.htmlspecialchars($post['post_id']).'&thread_id='.htmlspecialchars($post['post_parent_id']).'&page='.htmlspecialchars($page).'">To se mi líbí (20)</a></strong></div>' . ( $post['user_desc_as_signature'] && mb_strlen($post['user_description'], 'utf-8') > 0 ? '<div class="line"></div><div class="post-user-signature">'.$parsedDescription.'</div>':'').'
+                        <div>'.$parsedText.'</div><div class="post-like"><strong><a class="section-link-newpost" href="like_post.php?id='.htmlspecialchars($post['post_id']).'&thread_id='.htmlspecialchars($post['post_parent_id']).'&page='.htmlspecialchars($page).'">'.( $likedThisPost ? 'Už se mi to nelíbí':'To se mi líbí').' ('.htmlspecialchars($myLikes).')</a></strong></div>' . ( $post['user_desc_as_signature'] && mb_strlen($post['user_description'], 'utf-8') > 0 ? '<div class="line"></div><div class="post-user-signature">'.$parsedDescription.'</div>':'').'
                     </div>
                   </div>';
         }

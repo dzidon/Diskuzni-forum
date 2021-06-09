@@ -11,6 +11,7 @@ $configDatabaseTableUsers = 'sp_users';
 $configDatabaseTableForgottenPass = 'sp_forgotten_passwords';
 $configDatabaseTableSections = 'sp_sections';
 $configDatabaseTablePosts = 'sp_posts';
+$configDatabaseTableLikes = 'sp_likes';
 
 //nazvy uzivatelskych roli
 $configRoleUser = 'user';
