@@ -86,7 +86,7 @@ if(mb_strlen($error, 'utf-8') == 0) {
         $result = $threadsQuery->fetch();
 
         //vytvoreni tlacitek na strankovani
-        $totalPages = $result['total_threads']/$configSectionPageMaxPosts;
+        $totalPages = ceil($result['total_threads']/$configSectionPageMaxPosts);
         $buttons = array();
 
         if($page == 1) { $leftPages = 0; $rightPages = 4; }

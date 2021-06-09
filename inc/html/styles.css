@@ -764,6 +764,11 @@ a:hover {
     margin-top: 10px;
 }
 
+.post-like {
+    margin-top: 10px;
+    text-align: right;
+}
+
 
 /*
     BBcode styly

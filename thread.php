@@ -49,7 +49,7 @@ if(isset($_POST['new-response']) && isset($thread)) {
             $result = $allPostsQuery->fetch();
 
             //presmerovani na posledni stranku v tematu
-            $lastPage = $result['total_posts']/$configThreadPageMaxPosts;
+            $lastPage = ceil($result['total_posts']/$configThreadPageMaxPosts);
             header('Location: thread.php?id='.$thread['post_id'].'&page='.$lastPage);
             exit();
         }
@@ -130,7 +130,7 @@ if(mb_strlen($error, 'utf-8') == 0) {
         $result = $allPostsQuery->fetch();
 
         //vytvoreni tlacitek na strankovani
-        $totalPages = $result['total_posts']/$configThreadPageMaxPosts;
+        $totalPages = ceil($result['total_posts']/$configThreadPageMaxPosts);
         $buttons = array();
 
         if($page == 1) { $leftPages = 0; $rightPages = 4; }
@@ -184,6 +184,7 @@ if(mb_strlen($error, 'utf-8') == 0) {
         foreach($posts as $post) {
             $i++;
 
+            //celkovy pocet prispevku uzivatele
             $allPostsQuery=$db->prepare('SELECT COUNT(user_id) as total_posts FROM '.$configDatabaseTablePosts.' WHERE user_id=:user_id;');
             $allPostsQuery->execute([
                 ':user_id' => $post['user_id']
@@ -224,7 +225,7 @@ if(mb_strlen($error, 'utf-8') == 0) {
                         '. ( isset($_SESSION['user_id']) && $_SESSION['user_id'] === $post['user_id'] && !$userMuted ? '<a href="edit_post.php?id='.htmlspecialchars($post['post_id']).'" class="section-post-name post-edit">Upravit</a>':'').'
                     </div>
                     <div class="post-wrap-right">
-                        '.$parsedText. ( $post['user_desc_as_signature'] && mb_strlen($post['user_description'], 'utf-8') > 0 ? '<div class="line"></div><div class="post-user-signature">'.$parsedDescription.'</div>':'').'
+                        <div>'.$parsedText.'</div><div class="post-like"><strong><a class="section-link-newpost" href="like_post.php?id='.htmlspecialchars($post['post_id']).'&thread_id='.htmlspecialchars($post['post_parent_id']).'&page='.htmlspecialchars($page).'">To se mi líbí (20)</a></strong></div>' . ( $post['user_desc_as_signature'] && mb_strlen($post['user_description'], 'utf-8') > 0 ? '<div class="line"></div><div class="post-user-signature">'.$parsedDescription.'</div>':'').'
                     </div>
                   </div>';
         }

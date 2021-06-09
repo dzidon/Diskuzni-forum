@@ -43,8 +43,8 @@ $configResponseMaxLen = 3000;
 //omezeni sekci
 $configSectionMinNameLen = 3;
 $configSectionMaxNameLen = 32;
-$configSectionPageMaxPosts = 1; //kolik temat se muze maximalne zobrazit na jedne strance pri rozkliknuti sekce
-$configThreadPageMaxPosts = 1; //kolik odpovedi se muze maximalne zobrazit na jedne strance pri rozkliknuti tematu
+$configSectionPageMaxPosts = 2; //kolik temat se muze maximalne zobrazit na jedne strance pri rozkliknuti sekce
+$configThreadPageMaxPosts = 2; //kolik odpovedi se muze maximalne zobrazit na jedne strance pri rozkliknuti tematu
 
 //odkazy
 $configUserNoProfilePicture = 'noprofilepic.png';
